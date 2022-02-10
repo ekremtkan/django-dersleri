@@ -56,3 +56,12 @@ accounts/migrations/*
 !blog/migrations/__init__.py
 !accounts/migrations/__init__.py
 staticfiles
+Django_4/staticroot
+Django_4/about/migrations/*
+Django_4/home/migrations/*
+Django_4/post/migrations/*
+Django_4/contact/migrations/*
+Django_4/blog/migrations/*
+Django_4/accounts/migrations/*
+
+

@@ -1,0 +1,17 @@
+
+{% load crispy_forms_tags %}
+{% block body   %}
+    <div CLASS="container">
+        <div class="row" >
+            <div class="col-md-12 offset-0">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form| crispy }}
+
+                    <input class="btn btn-success offset-md-4" type="submit" value="Gonder">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock   %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title   %}
+    Main Page - {{block.super}}
+{% endblock   %}
+
+{% block body   %}
+
+{#Merhaba {{ isim }}#}
+
+<div class="container" >
+    <div class="row">
+        <div class="row-cols-md-6 offset-md-4">
+            <div class="caption-top">
+            {% for post in posts %}
+        {#    {{ post.id }}  <br>#}
+        {#    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> <br>#}
+        {#    <a href="/post/list/{{ post.id }}">{{ post.title }}</a> <br>#}
+        {#    {{ post.context }}<br>#}
+        {#    {{ post.puplis_date }}<br>#}
+
+                {% if post.image %} <img src="{{ post.image.url }}" class="img-thumbnail"> {% endif %}
+                <h5 class="card-title">{{ post.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ post.puplish_date| timesince }} önce</h6>
+                <h4 class="card-subtitle mb-2 text-muted">Yazar:{{ post.user }}</h4>
+
+                <p class="card-body">
+                        {{ post.context|linebreaks|truncatechars:155  }}
+                    </p>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <a href="{{ post.get_absolute_url }}" style="width: 5rem;" class="btn btn-primary" role="button">İncele</a> <br>
+                        {% if request.user.is_authenticated %}
+                            <a href="{{ post.get_update_url }}"   style="width: 5rem;" class="btn btn-secondary" role="button">Update</a> <br>
+                            <a href="{{ post.get_delete_url }}"   style="width: 5rem;" class="btn btn-danger" role="button" >Delete</a> <br>
+                        {% endif %}
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="row-cols-md-6 offset-md-4">
+            <div class="pagination">
+                    <span class="step-links">
+                        {% if posts.has_previous %}
+                            <a href="?page={{ posts.previous_page_number }}">previous</a>
+                        {% endif %}
+
+                        <span class="current">
+                            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+                        </span>
+
+                        {% if posts.has_next %}
+                            <a href="?page={{ posts.next_page_number }}">next</a>
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock   %}

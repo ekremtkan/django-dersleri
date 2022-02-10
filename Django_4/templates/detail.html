@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+
+    {% block title   %}
+        Detail Page
+    {% endblock   %}
+{% block body   %}
+
+
+    <div class="container col-md-6" >
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="img-thumbnail">
+        {% endif %}
+        <div class="card-body col-md-6">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{ post.puplish_date }}</h6>
+        <h4 class="card-subtitle mb-2 text-muted">Yazar:{{ post.user }}</h4>
+        <p class="card-body">
+            {{ post.context|linebreaks }}
+        </p>
+        {% if request.user.is_authenticated %}
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="{{ post.get_update_url }}"   style="width: 5rem;" class="btn btn-secondary" role="button">Update</a> <br>
+                <a href="{{ post.get_delete_url }}"   style="width: 5rem;" class="btn btn-danger" role="button" >Delete</a> <br>
+            </div>
+        {% endif %}
+        </div>
+        <br><br>
+        <h4>Yorum Ekle</h4>
+        <hr>
+        {% include "comment.html" %}
+        <br><br>
+        {% for comment in post.comments.all %}
+
+            <h6> {{ comment.name }} | {{ comment.creat_date|timesince }} önce </h6>
+            <br>
+            {{ comment.comment|linebreaks }}
+            <hr>
+
+        {% endfor  %}
+    </div>
+
+{#{{ post.id }} <br>#}
+{#{{ post.title }} <br>#}
+{#{{ post.context }}<br>#}
+{#{{ post.puplis_date }}<br>#}
+
+{% endblock   %}

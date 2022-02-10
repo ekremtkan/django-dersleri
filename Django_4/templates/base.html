@@ -1,0 +1,40 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+
+        {% block title   %}
+            Django Ders Page
+        {% endblock   %}
+    </title>
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" >
+
+
+</head>
+{#<img src="{% static 'logo.png' %}">#}
+
+<body>
+
+
+{% include 'messages.html' %}
+{% include 'header.html' %}
+
+{% block body   %}
+
+{% endblock   %}
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="{% static 'js/jquery.min.js' %}" ></script>
+{#<script src="{% static 'js/bootstrap.bundle.min.js' %}" ></script>#}
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+{#<script src="{% static 'js/bootstrap.esm.min.js' %}" ></script>#}
+<script src="{% static 'js/bootstrap.min.js' %}" ></script>
+
+
+</body>
+</html>
